@@ -7,8 +7,10 @@
 // $Gender = $_POST('gender');
 // $Country = $_POST('country');
 
-$filename = './userdata.csv';
+$filename = "./userdata.csv";
 $handle = fopen($filename, "r");
 $content = fread($handle, filesize($filename));
 echo $content;
 fclose($handle);
+
+print_r($_POST);
