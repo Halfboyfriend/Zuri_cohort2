@@ -14,3 +14,5 @@ echo $content;
 fclose($handle);
 
 print_r($_POST);
+
+?>
