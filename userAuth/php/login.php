@@ -12,12 +12,19 @@ function loginUser($email, $password){
         Finish this function to check if username and password 
     from file match that which is passed from the form
     */
-    if ($username == $_POST['email'] && $password == $_POST['password'])
+    if ($username == "test" && $password == "test")
     {
-        loginUser($email, $password);
-        session_start();
+        $_SESSION['username'] = $username;
+        redirect('/add-property.php');
+    } else{
+        if (isset($_POST['login'])) {
+            echo "Username or password is incorrect";
+        }
     }
+    
 }
 
 echo "HANDLE THIS PAGE";
+//Task completed
+
 
