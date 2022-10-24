@@ -5,12 +5,16 @@ Check if the existing user has a session
 if it does
 destroy the session and redirect to login page
 */
-if ($_SESSION['id']){
-    unset($_SESSION['id']);
+session_start();
+
+if ($_SESSION['username']){
+    session_unset();
+    session_destroy();
+    header('location: ../index.php');
+    exit;
 }
-header('Location:login.php');
 }
 
 logout();
-//Task Completed
-echo "HANDLE THIS PAGE";
+
+//echo "HANDLE THIS PAGE";
