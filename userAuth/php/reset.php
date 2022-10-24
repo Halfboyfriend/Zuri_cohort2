@@ -3,26 +3,49 @@ if(isset($_POST['submit'])){
     $email = $_POST['email']; //complete this;
     $newpassword = $_POST['password'];//complete this;
 
-    resetPassword($email, $password);
+
+    resetPassword($email, $newpassword);
 }
 
 function resetPassword($email, $password){
     //open file and check if the username exist inside
-    $filename = "./users.csv";
-    $handle = fopen($filename, "r");
-    $content = fread($handle, filesize($filename));
-    fclose($handle);
+   $file = fopen("../storage/users.csv", "r");
 
-    if ($email == $_POST['email'])
-    {
-        echo "Email already exit";
-    }
-    else {
-        $newpassword = $_POST['password'];
-    }
+   while(!feof($file)){
+    $readCsv = fgetcsv($file);
 
-    //if it does, replace the password
+    //open file and check if the email exist inside
+    if ($readCsv[1] == $email) {
+        //if yes, replace password
+
+        $readCsv[2] = $password;
+        $file = fopen("../storage/users.csv", "w");
+        fputcsv($file, $readCsv);
+
+       
+        $message = "Password successfully UPDATED";
+
+        echo "<script>
+        alert('$message');
+        window.location.href='../forms/login.html';
+        </script>";
+
+        fclose($file);
+        exit;
+    } else {
+      
+        $message = "User Not Found";
+
+        echo "<script>
+        alert('$message');
+        window.location.href='../forms/resetpassword.html';
+        </script>";
+    }
+   }
 }
-echo "HANDLE THIS PAGE";
+//echo "HANDLE THIS PAGE";
+
+
+
 
 //Completed
